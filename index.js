@@ -201,6 +201,4 @@ app.delete("/delete-addedmoney/:id",(req,res)=>{
 
 
 
-app.listen(5000,()=>{
-    console.log("Server Started at 5000");
-})
+app.listen()
