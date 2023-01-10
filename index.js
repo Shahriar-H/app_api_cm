@@ -10,7 +10,7 @@ app.use(cors())
 
 const FindDuplicate = (email)=>{
     return new Promise(async function(resolve, reject) {
-        const SelectEmailifExist = "SELECT * FROM user WHERE email=?";
+        const SelectEmailifExist = "SELECT * FROM users WHERE email=?";
         db.query(SelectEmailifExist,[email],async (error,results,fields)=>{
             if (error) {
                 reject(error);
@@ -32,7 +32,7 @@ const FindDuplicate = (email)=>{
 }
 
 app.post('/signup',async (req,res)=>{
-    const sql = "INSERT INTO user SET ? ";
+    const sql = "INSERT INTO users SET ? ";
     const data = req.body;
     
     FindDuplicate(data?.email).then((totalAllreadyUser)=>{
@@ -67,7 +67,7 @@ app.post('/login',(req,res)=>{
         const data = req?.body;
         console.log(data?.email)
 
-        const SelectEmailifExist = "SELECT * FROM user WHERE email=? AND password=? LIMIT 1";
+        const SelectEmailifExist = "SELECT * FROM users WHERE email=? AND password=? LIMIT 1";
         db.query(SelectEmailifExist,[data?.email,data?.password],(error,results,fields)=>{
             if (error) {
                 reject(error);
@@ -98,7 +98,7 @@ app.post('/login',(req,res)=>{
 
 app.delete("/delete-user/:id",(req,res)=>{
     const id = req?.params.id;
-    const sql = "DELETE FROM user WHERE id="+id;
+    const sql = "DELETE FROM users WHERE id="+id;
     
 
     db.query(sql,(err,result)=>{
@@ -140,7 +140,7 @@ app.delete("/delete-expence/:id",(req,res)=>{
 })
 
 app.get("/users",(req,res)=>{
-    const sql = "SELECT * FROM user";
+    const sql = "SELECT * FROM users";
     db.query(sql,(err,results)=>{
         if(err){
             res.send({status:404,message:"Data fetching failed"});
