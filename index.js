@@ -153,7 +153,7 @@ app.get("/expences",(req,res)=>{
     const sql = "SELECT * FROM expences";
     db.query(sql,(err,results)=>{
         if(err){
-            res.send({status:404,message:"Data fetching failed"});
+            res.send({status:404,message:"Data fetching failed",result:results});
             return 0;
         }
         res.send({status:200,message:"Data fetched",results:results});
@@ -163,7 +163,7 @@ app.get("/records",(req,res)=>{
     const sql = "SELECT * FROM money";
     db.query(sql,(err,results)=>{
         if(err){
-            res.send({status:404,message:"Data fetching failed"});
+            res.send({status:404,message:"Data fetching failed",result:results});
             return 0;
         }
         res.send({status:200,message:"Data fetched",results:results});
