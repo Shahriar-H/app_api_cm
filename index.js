@@ -201,4 +201,6 @@ app.delete("/delete-addedmoney/:id",(req,res)=>{
 
 
 
-app.listen()
+app.listen(process.env.PORT || 3000, ()=>{
+ console.log("connected")   
+})
